@@ -1,0 +1,4248 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="AdminActivitySummaryPerMonth"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Landscape"
+		 pageWidth="842"
+		 pageHeight="595"
+		 columnWidth="782"
+		 columnSpacing="0"
+		 leftMargin="30"
+		 rightMargin="30"
+		 topMargin="20"
+		 bottomMargin="20"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+	<style 
+		name="ActivityName"
+		isDefault="false"
+		forecolor="#006633"
+	>
+	</style>
+	<style 
+		name="zero"
+		isDefault="false"
+		forecolor="#FFFFFF"
+	>
+	</style>
+	<style 
+		name="leave"
+		isDefault="false"
+		forecolor="#CC0033"
+	>
+	</style>
+	<style 
+		name="BelowEight"
+		isDefault="false"
+		forecolor="#FF0000"
+	>
+	</style>
+	<style 
+		name="GreaterThanEight"
+		isDefault="false"
+		forecolor="#0000CC"
+	>
+	</style>
+	<style 
+		name="EqualToEight"
+		isDefault="false"
+		forecolor="#00CC00"
+	>
+	</style>
+
+	<queryString><![CDATA[SELECT 'Non-Billable' as TypeName, 'n/a' AS ProjectName, a_non_billable_list.non_bill_name as ActivityName,
+       a_users.user_id, 'xMName - xYear' AS MName, a_non_billable_list.non_bill_id AS ActivityID,
+       CONCAT(a_users.first_name, ' ',  SUBSTRING(a_users.middle_name,1,1), '. ' , a_users.last_name) AS name,
+       SUM(if(DAY(a_non_billable.trans_date)=1, a_non_billable.hrs_elapsed,0)) as Day1,
+       SUM(if(DAY(a_non_billable.trans_date)=2, a_non_billable.hrs_elapsed,0)) as Day2,
+       SUM(if(DAY(a_non_billable.trans_date)=3, a_non_billable.hrs_elapsed,0)) as Day3,
+       SUM(if(DAY(a_non_billable.trans_date)=4, a_non_billable.hrs_elapsed,0)) as Day4,
+       SUM(if(DAY(a_non_billable.trans_date)=5, a_non_billable.hrs_elapsed,0)) as Day5,
+       SUM(if(DAY(a_non_billable.trans_date)=6, a_non_billable.hrs_elapsed,0)) as Day6,
+       SUM(if(DAY(a_non_billable.trans_date)=7, a_non_billable.hrs_elapsed,0)) as Day7,
+       SUM(if(DAY(a_non_billable.trans_date)=8, a_non_billable.hrs_elapsed,0)) as Day8,
+       SUM(if(DAY(a_non_billable.trans_date)=9, a_non_billable.hrs_elapsed,0)) as Day9,
+       SUM(if(DAY(a_non_billable.trans_date)=10, a_non_billable.hrs_elapsed,0)) as Day10,
+       SUM(if(DAY(a_non_billable.trans_date)=11, a_non_billable.hrs_elapsed,0)) as Day11,
+       SUM(if(DAY(a_non_billable.trans_date)=12, a_non_billable.hrs_elapsed,0)) as Day12,
+       SUM(if(DAY(a_non_billable.trans_date)=13, a_non_billable.hrs_elapsed,0)) as Day13,
+       SUM(if(DAY(a_non_billable.trans_date)=14, a_non_billable.hrs_elapsed,0)) as Day14,
+       SUM(if(DAY(a_non_billable.trans_date)=15, a_non_billable.hrs_elapsed,0)) as Day15,
+       SUM(if(DAY(a_non_billable.trans_date)=16, a_non_billable.hrs_elapsed,0)) as Day16,
+       SUM(if(DAY(a_non_billable.trans_date)=17, a_non_billable.hrs_elapsed,0)) as Day17,
+       SUM(if(DAY(a_non_billable.trans_date)=18, a_non_billable.hrs_elapsed,0)) as Day18,
+       SUM(if(DAY(a_non_billable.trans_date)=19, a_non_billable.hrs_elapsed,0)) as Day19,
+       SUM(if(DAY(a_non_billable.trans_date)=20, a_non_billable.hrs_elapsed,0)) as Day20,
+       SUM(if(DAY(a_non_billable.trans_date)=21, a_non_billable.hrs_elapsed,0)) as Day21,
+       SUM(if(DAY(a_non_billable.trans_date)=22, a_non_billable.hrs_elapsed,0)) as Day22,
+       SUM(if(DAY(a_non_billable.trans_date)=23, a_non_billable.hrs_elapsed,0)) as Day23,
+       SUM(if(DAY(a_non_billable.trans_date)=24, a_non_billable.hrs_elapsed,0)) as Day24,
+       SUM(if(DAY(a_non_billable.trans_date)=25, a_non_billable.hrs_elapsed,0)) as Day25,
+       SUM(if(DAY(a_non_billable.trans_date)=26, a_non_billable.hrs_elapsed,0)) as Day26,
+       SUM(if(DAY(a_non_billable.trans_date)=27, a_non_billable.hrs_elapsed,0)) as Day27,
+       SUM(if(DAY(a_non_billable.trans_date)=28, a_non_billable.hrs_elapsed,0)) as Day28,
+       SUM(if(DAY(a_non_billable.trans_date)=29, a_non_billable.hrs_elapsed,0)) as Day29,
+       SUM(if(DAY(a_non_billable.trans_date)=30, a_non_billable.hrs_elapsed,0)) as Day30,
+       SUM(if(DAY(a_non_billable.trans_date)=31, a_non_billable.hrs_elapsed,0)) as Day31, 
+       0 as W1, 0 as W2, 0 as W3, 0 as W4, 0 as W5, 0 as W6, 0 as W7, 0 as W8, 0 as W9, 0 as W10, 0 as W11, 0 as W12, 0 as W13, 0 as W14, 0 as W15, 0 as W16, 0 as W17, 0 as W18, 0 as W19, 0 as W20, 0 as W21, 0 as W22, 0 as W23, 0 as W24, 0 as W25, 0 as W26, 0 as W27, 0 as W28, 0 as W29, 0 as W30, 0 as W31 
+FROM (a_non_billable LEFT JOIN a_users ON a_non_billable.user_id = a_users.user_id) LEFT JOIN a_non_billable_list ON a_non_billable.non_bill_type = a_non_billable_list.non_bill_id
+WHERE a_users.user_id='helen_r' AND MONTH(a_non_billable.trans_date)=1 AND YEAR(a_non_billable.trans_date)=2009
+GROUP BY 4
+UNION 
+SELECT 'Work Leaves' as TypeName, 'n/a', a_leaves.leave_name as ActivityName,
+       a_users.user_id, 'xMName - xYear' AS MName, a_leaves.leave_id,
+       CONCAT(a_users.first_name, ' ',  SUBSTRING(a_users.middle_name,1,1), '. ' , a_users.last_name) AS name,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+       SUM(if(DAY(a_leave_details.trans_date)=1, -(a_leave_details.count * 8),0)),
+       SUM(if(DAY(a_leave_details.trans_date)=2, -(a_leave_details.count * 8),0)),
+       SUM(if(DAY(a_leave_details.trans_date)=3, -(a_leave_details.count * 8),0)),
+       SUM(if(DAY(a_leave_details.trans_date)=4, -(a_leave_details.count * 8),0)),
+       SUM(if(DAY(a_leave_details.trans_date)=5, -(a_leave_details.count * 8),0)),
+       SUM(if(DAY(a_leave_details.trans_date)=6, -(a_leave_details.count * 8),0)),
+       SUM(if(DAY(a_leave_details.trans_date)=7, -(a_leave_details.count * 8),0)),
+       SUM(if(DAY(a_leave_details.trans_date)=8, -(a_leave_details.count * 8),0)),
+       SUM(if(DAY(a_leave_details.trans_date)=9, -(a_leave_details.count * 8),0)),
+       SUM(if(DAY(a_leave_details.trans_date)=10, -(a_leave_details.count * 8),0)),
+       SUM(if(DAY(a_leave_details.trans_date)=11, -(a_leave_details.count * 8),0)),
+       SUM(if(DAY(a_leave_details.trans_date)=12, -(a_leave_details.count * 8),0)),
+       SUM(if(DAY(a_leave_details.trans_date)=13, -(a_leave_details.count * 8),0)),
+       SUM(if(DAY(a_leave_details.trans_date)=14, -(a_leave_details.count * 8),0)),
+       SUM(if(DAY(a_leave_details.trans_date)=15, -(a_leave_details.count * 8),0)),
+       SUM(if(DAY(a_leave_details.trans_date)=16, -(a_leave_details.count * 8),0)),
+       SUM(if(DAY(a_leave_details.trans_date)=17, -(a_leave_details.count * 8),0)),
+       SUM(if(DAY(a_leave_details.trans_date)=18, -(a_leave_details.count * 8),0)),
+       SUM(if(DAY(a_leave_details.trans_date)=19, -(a_leave_details.count * 8),0)),
+       SUM(if(DAY(a_leave_details.trans_date)=20, -(a_leave_details.count * 8),0)),
+       SUM(if(DAY(a_leave_details.trans_date)=21, -(a_leave_details.count * 8),0)),
+       SUM(if(DAY(a_leave_details.trans_date)=22, -(a_leave_details.count * 8),0)),
+       SUM(if(DAY(a_leave_details.trans_date)=23, -(a_leave_details.count * 8),0)),
+       SUM(if(DAY(a_leave_details.trans_date)=24, -(a_leave_details.count * 8),0)),
+       SUM(if(DAY(a_leave_details.trans_date)=25, -(a_leave_details.count * 8),0)),
+       SUM(if(DAY(a_leave_details.trans_date)=26, -(a_leave_details.count * 8),0)),
+       SUM(if(DAY(a_leave_details.trans_date)=27, -(a_leave_details.count * 8),0)),
+       SUM(if(DAY(a_leave_details.trans_date)=28, -(a_leave_details.count * 8),0)),
+       SUM(if(DAY(a_leave_details.trans_date)=29, -(a_leave_details.count * 8),0)),
+       SUM(if(DAY(a_leave_details.trans_date)=30, -(a_leave_details.count * 8),0)),
+       SUM(if(DAY(a_leave_details.trans_date)=31, -(a_leave_details.count * 8),0))
+FROM (a_leaves RIGHT JOIN a_leave_details ON a_leaves.leave_id = a_leave_details.leave_id) LEFT JOIN a_users ON a_leave_details.user_id = a_users.user_id
+WHERE a_users.user_id='helen_r' AND MONTH(a_leave_details.trans_date)=1 AND YEAR(a_leave_details.trans_date)=2009
+GROUP BY 4
+UNION
+SELECT 'Billable' as TypeName, CONCAT(a_project.project_name, '     Client: ', a_client.c_name), a_def_activity.act_name,
+       a_users.user_id, 'xMName - xYear' AS MName, a_def_activity.act_id,
+       CONCAT(a_users.first_name, ' ',  SUBSTRING(a_users.middle_name,1,1), '. ' , a_users.last_name) AS name,
+       SUM(if(DAY(a_schedule.trans_date)=1, a_schedule.hrs_worked,0)) as Day1,
+       SUM(if(DAY(a_schedule.trans_date)=2, a_schedule.hrs_worked,0)) as Day2,
+       SUM(if(DAY(a_schedule.trans_date)=3, a_schedule.hrs_worked,0)) as Day3,
+       SUM(if(DAY(a_schedule.trans_date)=4, a_schedule.hrs_worked,0)) as Day4,
+       SUM(if(DAY(a_schedule.trans_date)=5, a_schedule.hrs_worked,0)) as Day5,
+       SUM(if(DAY(a_schedule.trans_date)=6, a_schedule.hrs_worked,0)) as Day6,
+       SUM(if(DAY(a_schedule.trans_date)=7, a_schedule.hrs_worked,0)) as Day7,
+       SUM(if(DAY(a_schedule.trans_date)=8, a_schedule.hrs_worked,0)) as Day8,
+       SUM(if(DAY(a_schedule.trans_date)=9, a_schedule.hrs_worked,0)) as Day9,
+       SUM(if(DAY(a_schedule.trans_date)=10, a_schedule.hrs_worked,0)) as Day10,
+       SUM(if(DAY(a_schedule.trans_date)=11, a_schedule.hrs_worked,0)) as Day11,
+       SUM(if(DAY(a_schedule.trans_date)=12, a_schedule.hrs_worked,0)) as Day12,
+       SUM(if(DAY(a_schedule.trans_date)=13, a_schedule.hrs_worked,0)) as Day13,
+       SUM(if(DAY(a_schedule.trans_date)=14, a_schedule.hrs_worked,0)) as Day14,
+       SUM(if(DAY(a_schedule.trans_date)=15, a_schedule.hrs_worked,0)) as Day15,
+       SUM(if(DAY(a_schedule.trans_date)=16, a_schedule.hrs_worked,0)) as Day16,
+       SUM(if(DAY(a_schedule.trans_date)=17, a_schedule.hrs_worked,0)) as Day17,
+       SUM(if(DAY(a_schedule.trans_date)=18, a_schedule.hrs_worked,0)) as Day18,
+       SUM(if(DAY(a_schedule.trans_date)=19, a_schedule.hrs_worked,0)) as Day19,
+       SUM(if(DAY(a_schedule.trans_date)=20, a_schedule.hrs_worked,0)) as Day20,
+       SUM(if(DAY(a_schedule.trans_date)=21, a_schedule.hrs_worked,0)) as Day21,
+       SUM(if(DAY(a_schedule.trans_date)=22, a_schedule.hrs_worked,0)) as Day22,
+       SUM(if(DAY(a_schedule.trans_date)=23, a_schedule.hrs_worked,0)) as Day23,
+       SUM(if(DAY(a_schedule.trans_date)=24, a_schedule.hrs_worked,0)) as Day24,
+       SUM(if(DAY(a_schedule.trans_date)=25, a_schedule.hrs_worked,0)) as Day25,
+       SUM(if(DAY(a_schedule.trans_date)=26, a_schedule.hrs_worked,0)) as Day26,
+       SUM(if(DAY(a_schedule.trans_date)=27, a_schedule.hrs_worked,0)) as Day27,
+       SUM(if(DAY(a_schedule.trans_date)=28, a_schedule.hrs_worked,0)) as Day28,
+       SUM(if(DAY(a_schedule.trans_date)=29, a_schedule.hrs_worked,0)) as Day29,
+       SUM(if(DAY(a_schedule.trans_date)=30, a_schedule.hrs_worked,0)) as Day30,
+       SUM(if(DAY(a_schedule.trans_date)=31, a_schedule.hrs_worked,0)) as Day31,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+FROM ((a_schedule LEFT JOIN (a_activity_list LEFT JOIN a_users ON a_activity_list.user_id = a_users.user_id) ON a_schedule.activity_list_id = a_activity_list.activity_list_id) LEFT JOIN ((a_project LEFT JOIN a_client ON a_project.client_id = a_client.client_id) RIGHT JOIN a_activity ON a_project.project_id = a_activity.project_id) ON a_activity_list.activity_id = a_activity.activity_id) LEFT JOIN a_def_activity ON a_schedule.activity_type = a_def_activity.act_id
+WHERE a_users.user_id='helen_r' AND MONTH(a_schedule.trans_date)=1 AND YEAR(a_schedule.trans_date)=2009
+GROUP BY 4
+ORDER BY 4, 1, 2, 3]]></queryString>
+
+	<field name="TypeName" class="java.lang.String"/>
+	<field name="ProjectName" class="java.lang.String"/>
+	<field name="ActivityName" class="java.lang.String"/>
+	<field name="user_id" class="java.lang.String"/>
+	<field name="MName" class="java.lang.String"/>
+	<field name="ActivityID" class="java.lang.String"/>
+	<field name="name" class="java.lang.String"/>
+	<field name="Day1" class="java.lang.Double"/>
+	<field name="Day2" class="java.lang.Double"/>
+	<field name="Day3" class="java.lang.Double"/>
+	<field name="Day4" class="java.lang.Double"/>
+	<field name="Day5" class="java.lang.Double"/>
+	<field name="Day6" class="java.lang.Double"/>
+	<field name="Day7" class="java.lang.Double"/>
+	<field name="Day8" class="java.lang.Double"/>
+	<field name="Day9" class="java.lang.Double"/>
+	<field name="Day10" class="java.lang.Double"/>
+	<field name="Day11" class="java.lang.Double"/>
+	<field name="Day12" class="java.lang.Double"/>
+	<field name="Day13" class="java.lang.Double"/>
+	<field name="Day14" class="java.lang.Double"/>
+	<field name="Day15" class="java.lang.Double"/>
+	<field name="Day16" class="java.lang.Double"/>
+	<field name="Day17" class="java.lang.Double"/>
+	<field name="Day18" class="java.lang.Double"/>
+	<field name="Day19" class="java.lang.Double"/>
+	<field name="Day20" class="java.lang.Double"/>
+	<field name="Day21" class="java.lang.Double"/>
+	<field name="Day22" class="java.lang.Double"/>
+	<field name="Day23" class="java.lang.Double"/>
+	<field name="Day24" class="java.lang.Double"/>
+	<field name="Day25" class="java.lang.Double"/>
+	<field name="Day26" class="java.lang.Double"/>
+	<field name="Day27" class="java.lang.Double"/>
+	<field name="Day28" class="java.lang.Double"/>
+	<field name="Day29" class="java.lang.Double"/>
+	<field name="Day30" class="java.lang.Double"/>
+	<field name="Day31" class="java.lang.Double"/>
+	<field name="W1" class="java.lang.Double"/>
+	<field name="W2" class="java.lang.Double"/>
+	<field name="W3" class="java.lang.Double"/>
+	<field name="W4" class="java.lang.Double"/>
+	<field name="W5" class="java.lang.Double"/>
+	<field name="W6" class="java.lang.Double"/>
+	<field name="W7" class="java.lang.Double"/>
+	<field name="W8" class="java.lang.Double"/>
+	<field name="W9" class="java.lang.Double"/>
+	<field name="W10" class="java.lang.Double"/>
+	<field name="W11" class="java.lang.Double"/>
+	<field name="W12" class="java.lang.Double"/>
+	<field name="W13" class="java.lang.Double"/>
+	<field name="W14" class="java.lang.Double"/>
+	<field name="W15" class="java.lang.Double"/>
+	<field name="W16" class="java.lang.Double"/>
+	<field name="W17" class="java.lang.Double"/>
+	<field name="W18" class="java.lang.Double"/>
+	<field name="W19" class="java.lang.Double"/>
+	<field name="W20" class="java.lang.Double"/>
+	<field name="W21" class="java.lang.Double"/>
+	<field name="W22" class="java.lang.Double"/>
+	<field name="W23" class="java.lang.Double"/>
+	<field name="W24" class="java.lang.Double"/>
+	<field name="W25" class="java.lang.Double"/>
+	<field name="W26" class="java.lang.Double"/>
+	<field name="W27" class="java.lang.Double"/>
+	<field name="W28" class="java.lang.Double"/>
+	<field name="W29" class="java.lang.Double"/>
+	<field name="W30" class="java.lang.Double"/>
+	<field name="W31" class="java.lang.Double"/>
+
+	<variable name="SUM_Day1_1" class="java.lang.Double" resetType="Group" resetGroup="UserName" calculation="Sum">
+		<variableExpression><![CDATA[$F{Day1}]]></variableExpression>
+	</variable>
+	<variable name="SUM_Day2_1" class="java.lang.Double" resetType="Group" resetGroup="UserName" calculation="Sum">
+		<variableExpression><![CDATA[$F{Day2}]]></variableExpression>
+	</variable>
+	<variable name="SUM_Day3_1" class="java.lang.Double" resetType="Group" resetGroup="UserName" calculation="Sum">
+		<variableExpression><![CDATA[$F{Day3}]]></variableExpression>
+	</variable>
+	<variable name="SUM_Day4_1" class="java.lang.Double" resetType="Group" resetGroup="UserName" calculation="Sum">
+		<variableExpression><![CDATA[$F{Day4}]]></variableExpression>
+	</variable>
+	<variable name="SUM_Day5_1" class="java.lang.Double" resetType="Group" resetGroup="UserName" calculation="Sum">
+		<variableExpression><![CDATA[$F{Day5}]]></variableExpression>
+	</variable>
+	<variable name="SUM_Day6_1" class="java.lang.Double" resetType="Group" resetGroup="UserName" calculation="Sum">
+		<variableExpression><![CDATA[$F{Day6}]]></variableExpression>
+	</variable>
+	<variable name="SUM_Day7_1" class="java.lang.Double" resetType="Group" resetGroup="UserName" calculation="Sum">
+		<variableExpression><![CDATA[$F{Day7}]]></variableExpression>
+	</variable>
+	<variable name="SUM_Day8_1" class="java.lang.Double" resetType="Group" resetGroup="UserName" calculation="Sum">
+		<variableExpression><![CDATA[$F{Day8}]]></variableExpression>
+	</variable>
+	<variable name="SUM_Day9_1" class="java.lang.Double" resetType="Group" resetGroup="UserName" calculation="Sum">
+		<variableExpression><![CDATA[$F{Day9}]]></variableExpression>
+	</variable>
+	<variable name="SUM_Day10_1" class="java.lang.Double" resetType="Group" resetGroup="UserName" calculation="Sum">
+		<variableExpression><![CDATA[$F{Day10}]]></variableExpression>
+	</variable>
+	<variable name="SUM_Day11_1" class="java.lang.Double" resetType="Group" resetGroup="UserName" calculation="Sum">
+		<variableExpression><![CDATA[$F{Day11}]]></variableExpression>
+	</variable>
+	<variable name="SUM_Day12_1" class="java.lang.Double" resetType="Group" resetGroup="UserName" calculation="Sum">
+		<variableExpression><![CDATA[$F{Day12}]]></variableExpression>
+	</variable>
+	<variable name="SUM_Day13_1" class="java.lang.Double" resetType="Group" resetGroup="UserName" calculation="Sum">
+		<variableExpression><![CDATA[$F{Day13}]]></variableExpression>
+	</variable>
+	<variable name="SUM_Day14_1" class="java.lang.Double" resetType="Group" resetGroup="UserName" calculation="Sum">
+		<variableExpression><![CDATA[$F{Day14}]]></variableExpression>
+	</variable>
+	<variable name="SUM_Day15_1" class="java.lang.Double" resetType="Group" resetGroup="UserName" calculation="Sum">
+		<variableExpression><![CDATA[$F{Day15}]]></variableExpression>
+	</variable>
+	<variable name="SUM_Day16_1" class="java.lang.Double" resetType="Group" resetGroup="UserName" calculation="Sum">
+		<variableExpression><![CDATA[$F{Day16}]]></variableExpression>
+	</variable>
+	<variable name="SUM_Day17_1" class="java.lang.Double" resetType="Group" resetGroup="UserName" calculation="Sum">
+		<variableExpression><![CDATA[$F{Day17}]]></variableExpression>
+	</variable>
+	<variable name="SUM_Day18_1" class="java.lang.Double" resetType="Group" resetGroup="UserName" calculation="Sum">
+		<variableExpression><![CDATA[$F{Day18}]]></variableExpression>
+	</variable>
+	<variable name="SUM_Day19_1" class="java.lang.Double" resetType="Group" resetGroup="UserName" calculation="Sum">
+		<variableExpression><![CDATA[$F{Day19}]]></variableExpression>
+	</variable>
+	<variable name="SUM_Day20_1" class="java.lang.Double" resetType="Group" resetGroup="UserName" calculation="Sum">
+		<variableExpression><![CDATA[$F{Day20}]]></variableExpression>
+	</variable>
+	<variable name="SUM_Day20_2" class="java.lang.Double" resetType="Group" resetGroup="UserName" calculation="Sum">
+		<variableExpression><![CDATA[$F{Day20}]]></variableExpression>
+	</variable>
+	<variable name="SUM_Day21_1" class="java.lang.Double" resetType="Group" resetGroup="UserName" calculation="Sum">
+		<variableExpression><![CDATA[$F{Day21}]]></variableExpression>
+	</variable>
+	<variable name="SUM_Day22_1" class="java.lang.Double" resetType="Group" resetGroup="UserName" calculation="Sum">
+		<variableExpression><![CDATA[$F{Day22}]]></variableExpression>
+	</variable>
+	<variable name="SUM_Day23_1" class="java.lang.Double" resetType="Group" resetGroup="UserName" calculation="Sum">
+		<variableExpression><![CDATA[$F{Day23}]]></variableExpression>
+	</variable>
+	<variable name="SUM_Day24_1" class="java.lang.Double" resetType="Group" resetGroup="UserName" calculation="Sum">
+		<variableExpression><![CDATA[$F{Day24}]]></variableExpression>
+	</variable>
+	<variable name="SUM_Day25_1" class="java.lang.Double" resetType="Group" resetGroup="UserName" calculation="Sum">
+		<variableExpression><![CDATA[$F{Day25}]]></variableExpression>
+	</variable>
+	<variable name="SUM_Day26_1" class="java.lang.Double" resetType="Group" resetGroup="UserName" calculation="Sum">
+		<variableExpression><![CDATA[$F{Day26}]]></variableExpression>
+	</variable>
+	<variable name="SUM_Day27_1" class="java.lang.Double" resetType="Group" resetGroup="UserName" calculation="Sum">
+		<variableExpression><![CDATA[$F{Day27}]]></variableExpression>
+	</variable>
+	<variable name="SUM_Day28_1" class="java.lang.Double" resetType="Group" resetGroup="UserName" calculation="Sum">
+		<variableExpression><![CDATA[$F{Day28}]]></variableExpression>
+	</variable>
+	<variable name="SUM_Day29_1" class="java.lang.Double" resetType="Group" resetGroup="UserName" calculation="Sum">
+		<variableExpression><![CDATA[$F{Day29}]]></variableExpression>
+	</variable>
+	<variable name="SUM_Day30_1" class="java.lang.Double" resetType="Group" resetGroup="UserName" calculation="Sum">
+		<variableExpression><![CDATA[$F{Day30}]]></variableExpression>
+	</variable>
+	<variable name="SUM_Day31_1" class="java.lang.Double" resetType="Group" resetGroup="UserName" calculation="Sum">
+		<variableExpression><![CDATA[$F{Day31}]]></variableExpression>
+	</variable>
+
+		<group  name="UserName" >
+			<groupExpression><![CDATA[$F{user_id}]]></groupExpression>
+			<groupHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+			</groupHeader>
+			<groupFooter>
+			<band height="55"  isSplitAllowed="true" >
+				<staticText>
+					<reportElement
+						x="5"
+						y="16"
+						width="212"
+						height="16"
+						key="staticText-8"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<text><![CDATA[Total hours worked]]></text>
+				</staticText>
+				<line direction="TopDown">
+					<reportElement
+						x="0"
+						y="52"
+						width="782"
+						height="0"
+						key="line-2"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						x="0"
+						y="54"
+						width="782"
+						height="0"
+						key="line-3"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="EqualToEight"
+						x="267"
+						y="14"
+						width="32"
+						height="21"
+						key="textField-40">
+							<printWhenExpression><![CDATA[$V{SUM_Day1_1}.doubleValue() == 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day1_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="EqualToEight"
+						x="298"
+						y="14"
+						width="31"
+						height="21"
+						key="textField-41">
+							<printWhenExpression><![CDATA[$V{SUM_Day2_1}.doubleValue() == 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day2_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="EqualToEight"
+						x="330"
+						y="14"
+						width="33"
+						height="21"
+						key="textField-42">
+							<printWhenExpression><![CDATA[$V{SUM_Day3_1}.doubleValue() == 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day3_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="EqualToEight"
+						x="362"
+						y="14"
+						width="31"
+						height="20"
+						key="textField-43">
+							<printWhenExpression><![CDATA[$V{SUM_Day4_1}.doubleValue() == 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day4_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="EqualToEight"
+						x="393"
+						y="14"
+						width="31"
+						height="20"
+						key="textField-44">
+							<printWhenExpression><![CDATA[$V{SUM_Day5_1}.doubleValue() == 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day5_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="EqualToEight"
+						x="425"
+						y="14"
+						width="30"
+						height="21"
+						key="textField-45">
+							<printWhenExpression><![CDATA[$V{SUM_Day6_1}.doubleValue() == 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day6_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="EqualToEight"
+						x="457"
+						y="14"
+						width="31"
+						height="22"
+						key="textField-46">
+							<printWhenExpression><![CDATA[$V{SUM_Day7_1}.doubleValue() == 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day7_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="EqualToEight"
+						x="488"
+						y="14"
+						width="30"
+						height="21"
+						key="textField-47">
+							<printWhenExpression><![CDATA[$V{SUM_Day8_1}.doubleValue() == 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day8_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="EqualToEight"
+						x="519"
+						y="14"
+						width="31"
+						height="21"
+						key="textField-48">
+							<printWhenExpression><![CDATA[$V{SUM_Day9_1}.doubleValue() == 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day9_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="EqualToEight"
+						x="551"
+						y="14"
+						width="30"
+						height="21"
+						key="textField-49">
+							<printWhenExpression><![CDATA[$V{SUM_Day10_1}.doubleValue() == 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day10_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="EqualToEight"
+						x="581"
+						y="14"
+						width="31"
+						height="21"
+						key="textField-50">
+							<printWhenExpression><![CDATA[$V{SUM_Day11_1}.doubleValue() == 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day11_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="EqualToEight"
+						x="613"
+						y="14"
+						width="31"
+						height="21"
+						key="textField-51">
+							<printWhenExpression><![CDATA[$V{SUM_Day12_1}.doubleValue() == 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day12_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="EqualToEight"
+						x="643"
+						y="14"
+						width="32"
+						height="21"
+						key="textField-52">
+							<printWhenExpression><![CDATA[$V{SUM_Day13_1}.doubleValue() == 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day13_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="EqualToEight"
+						x="675"
+						y="14"
+						width="31"
+						height="21"
+						key="textField-53">
+							<printWhenExpression><![CDATA[$V{SUM_Day14_1}.doubleValue() == 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day14_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="EqualToEight"
+						x="706"
+						y="14"
+						width="30"
+						height="21"
+						key="textField-54">
+							<printWhenExpression><![CDATA[$V{SUM_Day15_1}.doubleValue() == 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day15_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="EqualToEight"
+						x="267"
+						y="31"
+						width="28"
+						height="20"
+						key="textField-55">
+							<printWhenExpression><![CDATA[$V{SUM_Day16_1}.doubleValue() == 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day16_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="EqualToEight"
+						x="298"
+						y="31"
+						width="33"
+						height="20"
+						key="textField-56">
+							<printWhenExpression><![CDATA[$V{SUM_Day17_1}.doubleValue() == 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day17_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="EqualToEight"
+						x="329"
+						y="31"
+						width="31"
+						height="20"
+						key="textField-57">
+							<printWhenExpression><![CDATA[$V{SUM_Day18_1}.doubleValue() == 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day18_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="EqualToEight"
+						x="361"
+						y="31"
+						width="34"
+						height="19"
+						key="textField-58">
+							<printWhenExpression><![CDATA[$V{SUM_Day19_1}.doubleValue() == 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day19_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="EqualToEight"
+						x="393"
+						y="30"
+						width="30"
+						height="20"
+						key="textField-59">
+							<printWhenExpression><![CDATA[$V{SUM_Day20_1}.doubleValue() == 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day20_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="EqualToEight"
+						x="424"
+						y="30"
+						width="30"
+						height="21"
+						key="textField-60">
+							<printWhenExpression><![CDATA[$V{SUM_Day21_1}.doubleValue() == 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day21_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="EqualToEight"
+						x="456"
+						y="30"
+						width="29"
+						height="21"
+						key="textField-61">
+							<printWhenExpression><![CDATA[$V{SUM_Day22_1}.doubleValue() == 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day22_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="EqualToEight"
+						x="488"
+						y="30"
+						width="31"
+						height="21"
+						key="textField-62">
+							<printWhenExpression><![CDATA[$V{SUM_Day23_1}.doubleValue() == 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day23_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="EqualToEight"
+						x="519"
+						y="30"
+						width="30"
+						height="20"
+						key="textField-63">
+							<printWhenExpression><![CDATA[$V{SUM_Day24_1}.doubleValue() == 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day24_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="EqualToEight"
+						x="551"
+						y="30"
+						width="30"
+						height="20"
+						key="textField-64">
+							<printWhenExpression><![CDATA[$V{SUM_Day25_1}.doubleValue() == 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day25_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="EqualToEight"
+						x="582"
+						y="30"
+						width="30"
+						height="21"
+						key="textField-65">
+							<printWhenExpression><![CDATA[$V{SUM_Day26_1}.doubleValue() == 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day26_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="EqualToEight"
+						x="613"
+						y="30"
+						width="30"
+						height="21"
+						key="textField-66">
+							<printWhenExpression><![CDATA[$V{SUM_Day27_1}.doubleValue() == 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day27_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="EqualToEight"
+						x="643"
+						y="30"
+						width="32"
+						height="20"
+						key="textField-67">
+							<printWhenExpression><![CDATA[$V{SUM_Day28_1}.doubleValue() == 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day28_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="EqualToEight"
+						x="674"
+						y="30"
+						width="31"
+						height="20"
+						key="textField-68">
+							<printWhenExpression><![CDATA[$V{SUM_Day29_1}.doubleValue() == 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day29_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="EqualToEight"
+						x="706"
+						y="30"
+						width="30"
+						height="20"
+						key="textField-69">
+							<printWhenExpression><![CDATA[$V{SUM_Day30_1}.doubleValue() == 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day30_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="EqualToEight"
+						x="737"
+						y="30"
+						width="29"
+						height="20"
+						key="textField-70">
+							<printWhenExpression><![CDATA[$V{SUM_Day31_1}.doubleValue() == 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day31_1}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement
+						x="393"
+						y="11"
+						width="18"
+						height="11"
+						key="staticText-10"/>
+					<box></box>
+					<textElement>
+						<font size="5"/>
+					</textElement>
+				<text><![CDATA[5]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="394"
+						y="27"
+						width="18"
+						height="11"
+						key="staticText-11"/>
+					<box></box>
+					<textElement>
+						<font size="5"/>
+					</textElement>
+				<text><![CDATA[20]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="551"
+						y="11"
+						width="18"
+						height="11"
+						key="staticText-12"/>
+					<box></box>
+					<textElement>
+						<font size="5"/>
+					</textElement>
+				<text><![CDATA[10]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="551"
+						y="27"
+						width="18"
+						height="11"
+						key="staticText-13"/>
+					<box></box>
+					<textElement>
+						<font size="5"/>
+					</textElement>
+				<text><![CDATA[25]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="706"
+						y="27"
+						width="18"
+						height="11"
+						key="staticText-14"/>
+					<box></box>
+					<textElement>
+						<font size="5"/>
+					</textElement>
+				<text><![CDATA[30]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="706"
+						y="11"
+						width="18"
+						height="11"
+						key="staticText-15"/>
+					<box></box>
+					<textElement>
+						<font size="5"/>
+					</textElement>
+				<text><![CDATA[15]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="BelowEight"
+						x="330"
+						y="14"
+						width="33"
+						height="21"
+						key="textField-102">
+							<printWhenExpression><![CDATA[$V{SUM_Day3_1}.doubleValue() >= 8.0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day3_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="BelowEight"
+						x="362"
+						y="14"
+						width="31"
+						height="20"
+						key="textField-103">
+							<printWhenExpression><![CDATA[$V{SUM_Day4_1}.doubleValue() >= 8.0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day4_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="BelowEight"
+						x="393"
+						y="14"
+						width="31"
+						height="20"
+						key="textField-104">
+							<printWhenExpression><![CDATA[$V{SUM_Day5_1}.doubleValue() >= 8.0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day5_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="BelowEight"
+						x="425"
+						y="14"
+						width="30"
+						height="21"
+						key="textField-105">
+							<printWhenExpression><![CDATA[$V{SUM_Day6_1}.doubleValue() >= 8.0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day6_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="BelowEight"
+						x="457"
+						y="14"
+						width="31"
+						height="22"
+						key="textField-106">
+							<printWhenExpression><![CDATA[$V{SUM_Day7_1}.doubleValue() >= 8.0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day7_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="BelowEight"
+						x="488"
+						y="14"
+						width="30"
+						height="21"
+						key="textField-107">
+							<printWhenExpression><![CDATA[$V{SUM_Day8_1}.doubleValue() >= 8.0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day8_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="BelowEight"
+						x="519"
+						y="14"
+						width="31"
+						height="21"
+						key="textField-108">
+							<printWhenExpression><![CDATA[$V{SUM_Day9_1}.doubleValue() >= 8.0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day9_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="BelowEight"
+						x="551"
+						y="14"
+						width="30"
+						height="21"
+						key="textField-109">
+							<printWhenExpression><![CDATA[$V{SUM_Day10_1}.doubleValue() >= 8.0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day10_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="BelowEight"
+						x="581"
+						y="14"
+						width="31"
+						height="21"
+						key="textField-110">
+							<printWhenExpression><![CDATA[$V{SUM_Day11_1}.doubleValue() >= 8.0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day11_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="BelowEight"
+						x="613"
+						y="14"
+						width="31"
+						height="21"
+						key="textField-111">
+							<printWhenExpression><![CDATA[$V{SUM_Day12_1}.doubleValue() >= 8.0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day12_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="BelowEight"
+						x="643"
+						y="14"
+						width="32"
+						height="21"
+						key="textField-112">
+							<printWhenExpression><![CDATA[$V{SUM_Day13_1}.doubleValue() >= 8.0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day13_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="BelowEight"
+						x="675"
+						y="14"
+						width="31"
+						height="21"
+						key="textField-113">
+							<printWhenExpression><![CDATA[$V{SUM_Day14_1}.doubleValue() >= 8.0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day14_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="BelowEight"
+						x="706"
+						y="14"
+						width="30"
+						height="21"
+						key="textField-114">
+							<printWhenExpression><![CDATA[$V{SUM_Day15_1}.doubleValue() >= 8.0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day15_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="BelowEight"
+						x="298"
+						y="31"
+						width="33"
+						height="20"
+						key="textField-115">
+							<printWhenExpression><![CDATA[$V{SUM_Day17_1}.doubleValue() >= 8.0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day17_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="BelowEight"
+						x="329"
+						y="31"
+						width="31"
+						height="20"
+						key="textField-116">
+							<printWhenExpression><![CDATA[$V{SUM_Day18_1}.doubleValue() >= 8.0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day18_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="BelowEight"
+						x="361"
+						y="31"
+						width="34"
+						height="19"
+						key="textField-117">
+							<printWhenExpression><![CDATA[$V{SUM_Day19_1}.doubleValue() >= 8.0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day19_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="BelowEight"
+						x="393"
+						y="30"
+						width="30"
+						height="20"
+						key="textField-118">
+							<printWhenExpression><![CDATA[$V{SUM_Day20_1}.doubleValue() >= 8.0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day20_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="BelowEight"
+						x="424"
+						y="30"
+						width="30"
+						height="21"
+						key="textField-119">
+							<printWhenExpression><![CDATA[$V{SUM_Day21_1}.doubleValue() >= 8.0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day21_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="BelowEight"
+						x="456"
+						y="30"
+						width="29"
+						height="21"
+						key="textField-120">
+							<printWhenExpression><![CDATA[$V{SUM_Day22_1}.doubleValue() >= 8.0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day22_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="BelowEight"
+						x="488"
+						y="30"
+						width="31"
+						height="21"
+						key="textField-121">
+							<printWhenExpression><![CDATA[$V{SUM_Day23_1}.doubleValue() >= 8.0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day23_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="BelowEight"
+						x="519"
+						y="30"
+						width="30"
+						height="20"
+						key="textField-122">
+							<printWhenExpression><![CDATA[$V{SUM_Day24_1}.doubleValue() >= 8.0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day24_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="BelowEight"
+						x="551"
+						y="30"
+						width="30"
+						height="20"
+						key="textField-123">
+							<printWhenExpression><![CDATA[$V{SUM_Day25_1}.doubleValue() >= 8.0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day25_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="BelowEight"
+						x="582"
+						y="30"
+						width="30"
+						height="21"
+						key="textField-124">
+							<printWhenExpression><![CDATA[$V{SUM_Day26_1}.doubleValue() >= 8.0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day26_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="BelowEight"
+						x="613"
+						y="30"
+						width="30"
+						height="21"
+						key="textField-125">
+							<printWhenExpression><![CDATA[$V{SUM_Day27_1}.doubleValue() >= 8.0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day27_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="BelowEight"
+						x="643"
+						y="30"
+						width="32"
+						height="20"
+						key="textField-126">
+							<printWhenExpression><![CDATA[$V{SUM_Day28_1}.doubleValue() >= 8.0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day28_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="BelowEight"
+						x="674"
+						y="30"
+						width="31"
+						height="20"
+						key="textField-127">
+							<printWhenExpression><![CDATA[$V{SUM_Day29_1}.doubleValue() >= 8.0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day29_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="BelowEight"
+						x="706"
+						y="30"
+						width="30"
+						height="20"
+						key="textField-128">
+							<printWhenExpression><![CDATA[$V{SUM_Day30_1}.doubleValue() >= 8.0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day30_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="BelowEight"
+						x="737"
+						y="30"
+						width="29"
+						height="20"
+						key="textField-129">
+							<printWhenExpression><![CDATA[$V{SUM_Day31_1}.doubleValue() >= 8.0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day31_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="BelowEight"
+						x="298"
+						y="14"
+						width="31"
+						height="21"
+						key="textField-130">
+							<printWhenExpression><![CDATA[$V{SUM_Day2_1}.doubleValue() >= 8.0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day2_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="BelowEight"
+						x="267"
+						y="14"
+						width="32"
+						height="21"
+						key="textField-131">
+							<printWhenExpression><![CDATA[$V{SUM_Day1_1}.doubleValue() >= 8.0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day1_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="BelowEight"
+						x="267"
+						y="31"
+						width="28"
+						height="20"
+						key="textField-132">
+							<printWhenExpression><![CDATA[$V{SUM_Day16_1}.doubleValue() >= 8.0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day16_1}]]></textFieldExpression>
+				</textField>
+				<elementGroup><!--  Start: 1 !-->
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="GreaterThanEight"
+						x="267"
+						y="14"
+						width="32"
+						height="21"
+						key="textField-133">
+							<printWhenExpression><![CDATA[$V{SUM_Day1_1}.doubleValue() > 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day1_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="GreaterThanEight"
+						x="298"
+						y="14"
+						width="31"
+						height="21"
+						key="textField-134">
+							<printWhenExpression><![CDATA[$V{SUM_Day2_1}.doubleValue() > 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day2_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="GreaterThanEight"
+						x="330"
+						y="14"
+						width="33"
+						height="21"
+						key="textField-135">
+							<printWhenExpression><![CDATA[$V{SUM_Day3_1}.doubleValue() > 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day3_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="GreaterThanEight"
+						x="362"
+						y="14"
+						width="31"
+						height="20"
+						key="textField-136">
+							<printWhenExpression><![CDATA[$V{SUM_Day4_1}.doubleValue() > 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day4_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="GreaterThanEight"
+						x="393"
+						y="14"
+						width="31"
+						height="20"
+						key="textField-137">
+							<printWhenExpression><![CDATA[$V{SUM_Day5_1}.doubleValue() > 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day5_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="GreaterThanEight"
+						x="425"
+						y="14"
+						width="30"
+						height="21"
+						key="textField-138">
+							<printWhenExpression><![CDATA[$V{SUM_Day6_1}.doubleValue() > 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day6_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="GreaterThanEight"
+						x="457"
+						y="14"
+						width="31"
+						height="22"
+						key="textField-139">
+							<printWhenExpression><![CDATA[$V{SUM_Day7_1}.doubleValue() > 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day7_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="GreaterThanEight"
+						x="488"
+						y="14"
+						width="30"
+						height="21"
+						key="textField-140">
+							<printWhenExpression><![CDATA[$V{SUM_Day8_1}.doubleValue() > 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day8_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="GreaterThanEight"
+						x="519"
+						y="14"
+						width="31"
+						height="21"
+						key="textField-141">
+							<printWhenExpression><![CDATA[$V{SUM_Day9_1}.doubleValue() > 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day9_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="GreaterThanEight"
+						x="551"
+						y="14"
+						width="30"
+						height="21"
+						key="textField-142">
+							<printWhenExpression><![CDATA[$V{SUM_Day10_1}.doubleValue() > 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day10_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="GreaterThanEight"
+						x="581"
+						y="14"
+						width="31"
+						height="21"
+						key="textField-143">
+							<printWhenExpression><![CDATA[$V{SUM_Day11_1}.doubleValue() > 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day11_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="GreaterThanEight"
+						x="613"
+						y="14"
+						width="31"
+						height="21"
+						key="textField-144">
+							<printWhenExpression><![CDATA[$V{SUM_Day12_1}.doubleValue() > 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day12_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="GreaterThanEight"
+						x="267"
+						y="31"
+						width="28"
+						height="20"
+						key="textField-145">
+							<printWhenExpression><![CDATA[$V{SUM_Day16_1}.doubleValue() > 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day16_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="GreaterThanEight"
+						x="298"
+						y="31"
+						width="33"
+						height="20"
+						key="textField-146">
+							<printWhenExpression><![CDATA[$V{SUM_Day17_1}.doubleValue() > 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day17_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="GreaterThanEight"
+						x="329"
+						y="31"
+						width="31"
+						height="20"
+						key="textField-147">
+							<printWhenExpression><![CDATA[$V{SUM_Day18_1}.doubleValue() > 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day18_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="GreaterThanEight"
+						x="361"
+						y="31"
+						width="34"
+						height="19"
+						key="textField-148">
+							<printWhenExpression><![CDATA[$V{SUM_Day19_1}.doubleValue() > 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day19_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="GreaterThanEight"
+						x="393"
+						y="30"
+						width="30"
+						height="20"
+						key="textField-149">
+							<printWhenExpression><![CDATA[$V{SUM_Day20_1}.doubleValue() > 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day20_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="GreaterThanEight"
+						x="424"
+						y="30"
+						width="30"
+						height="21"
+						key="textField-150">
+							<printWhenExpression><![CDATA[$V{SUM_Day21_1}.doubleValue() > 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day21_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="GreaterThanEight"
+						x="456"
+						y="30"
+						width="29"
+						height="21"
+						key="textField-151">
+							<printWhenExpression><![CDATA[$V{SUM_Day22_1}.doubleValue() > 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day22_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="GreaterThanEight"
+						x="488"
+						y="30"
+						width="31"
+						height="21"
+						key="textField-152">
+							<printWhenExpression><![CDATA[$V{SUM_Day23_1}.doubleValue() > 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day23_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="GreaterThanEight"
+						x="519"
+						y="30"
+						width="30"
+						height="20"
+						key="textField-153">
+							<printWhenExpression><![CDATA[$V{SUM_Day24_1}.doubleValue() > 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day24_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="GreaterThanEight"
+						x="551"
+						y="30"
+						width="30"
+						height="20"
+						key="textField-154">
+							<printWhenExpression><![CDATA[$V{SUM_Day25_1}.doubleValue() > 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day25_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="GreaterThanEight"
+						x="582"
+						y="30"
+						width="30"
+						height="21"
+						key="textField-155">
+							<printWhenExpression><![CDATA[$V{SUM_Day26_1}.doubleValue() > 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day26_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="GreaterThanEight"
+						x="613"
+						y="30"
+						width="30"
+						height="21"
+						key="textField-156">
+							<printWhenExpression><![CDATA[$V{SUM_Day27_1}.doubleValue() > 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day27_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="GreaterThanEight"
+						x="643"
+						y="14"
+						width="32"
+						height="21"
+						key="textField-157">
+							<printWhenExpression><![CDATA[$V{SUM_Day13_1}.doubleValue() > 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day13_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="GreaterThanEight"
+						x="675"
+						y="14"
+						width="31"
+						height="21"
+						key="textField-158">
+							<printWhenExpression><![CDATA[$V{SUM_Day14_1}.doubleValue() > 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day14_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="GreaterThanEight"
+						x="706"
+						y="14"
+						width="30"
+						height="21"
+						key="textField-159">
+							<printWhenExpression><![CDATA[$V{SUM_Day15_1}.doubleValue() > 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day15_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="GreaterThanEight"
+						x="643"
+						y="30"
+						width="32"
+						height="20"
+						key="textField-160">
+							<printWhenExpression><![CDATA[$V{SUM_Day28_1}.doubleValue() > 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day28_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="GreaterThanEight"
+						x="674"
+						y="30"
+						width="31"
+						height="20"
+						key="textField-161">
+							<printWhenExpression><![CDATA[$V{SUM_Day29_1}.doubleValue() > 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day29_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="GreaterThanEight"
+						x="706"
+						y="30"
+						width="30"
+						height="20"
+						key="textField-162">
+							<printWhenExpression><![CDATA[$V{SUM_Day30_1}.doubleValue() > 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day30_1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="GreaterThanEight"
+						x="737"
+						y="30"
+						width="29"
+						height="20"
+						key="textField-163">
+							<printWhenExpression><![CDATA[$V{SUM_Day31_1}.doubleValue() > 8.0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{SUM_Day31_1}]]></textFieldExpression>
+				</textField>
+				</elementGroup><!-- End 1 !-->
+			</band>
+			</groupFooter>
+		</group>
+		<group  name="ActivityType" >
+			<groupExpression><![CDATA[$F{TypeName}]]></groupExpression>
+			<groupHeader>
+			<band height="18"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="ActivityName"
+						x="6"
+						y="0"
+						width="272"
+						height="18"
+						key="textField-2"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-BoldOblique" isBold="true" isItalic="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{TypeName}]]></textFieldExpression>
+				</textField>
+			</band>
+			</groupHeader>
+			<groupFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+			</groupFooter>
+		</group>
+		<group  name="ProjectName" >
+			<groupExpression><![CDATA[$F{ProjectName}]]></groupExpression>
+			<groupHeader>
+			<band height="18"  isSplitAllowed="true" >
+				<staticText>
+					<reportElement
+						x="15"
+						y="0"
+						width="84"
+						height="16"
+						key="staticText-9"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" size="9" isBold="true"/>
+					</textElement>
+				<text><![CDATA[Project:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="55"
+						y="0"
+						width="724"
+						height="16"
+						key="textField-39"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" size="9" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{ProjectName}]]></textFieldExpression>
+				</textField>
+			</band>
+			</groupHeader>
+			<groupFooter>
+			<band height="2"  isSplitAllowed="true" >
+			</band>
+			</groupFooter>
+		</group>
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="63"  isSplitAllowed="true" >
+				<staticText>
+					<reportElement
+						x="2"
+						y="3"
+						width="186"
+						height="38"
+						forecolor="#339900"
+						key="staticText-1"/>
+					<box></box>
+					<textElement>
+						<font fontName="Georgia" pdfFontName="Helvetica-Oblique" size="24" isBold="false" isItalic="true"/>
+					</textElement>
+				<text><![CDATA[the new thinkers]]></text>
+				</staticText>
+				<line direction="TopDown">
+					<reportElement
+						x="1"
+						y="59"
+						width="777"
+						height="0"
+						key="line-1"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<staticText>
+					<reportElement
+						x="1"
+						y="29"
+						width="186"
+						height="27"
+						forecolor="#999999"
+						key="staticText-2"/>
+					<box></box>
+					<textElement>
+						<font fontName="Georgia" pdfFontName="Helvetica-Oblique" size="8" isBold="false" isItalic="true"/>
+					</textElement>
+				<text><![CDATA[time management system]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="2"
+						y="40"
+						width="533"
+						height="20"
+						forecolor="#000000"
+						key="staticText-3"/>
+					<box></box>
+					<textElement>
+						<font fontName="Georgia" pdfFontName="Helvetica-Oblique" size="14" isBold="false" isItalic="true"/>
+					</textElement>
+				<text><![CDATA[activity summary per month]]></text>
+				</staticText>
+			</band>
+		</title>
+		<pageHeader>
+			<band height="51"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="73"
+						y="7"
+						width="83"
+						height="18"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" size="10" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{user_id}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="39"
+						y="26"
+						width="313"
+						height="18"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" size="10" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{name}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement
+						x="359"
+						y="7"
+						width="84"
+						height="13"
+						key="staticText-4"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<text><![CDATA[For the Month of]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="443"
+						y="7"
+						width="219"
+						height="19"
+						key="textField-1"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{MName}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement
+						x="359"
+						y="26"
+						width="420"
+						height="13"
+						key="staticText-5"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Oblique" isBold="false" isItalic="true"/>
+					</textElement>
+				<text><![CDATA[ Billable Activity ID is composed of the client id, project id, and activity id]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="5"
+						y="7"
+						width="68"
+						height="13"
+						key="staticText-81"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<text><![CDATA[Employee ID:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="5"
+						y="26"
+						width="33"
+						height="13"
+						key="staticText-82"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<text><![CDATA[Name:]]></text>
+				</staticText>
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="30"  isSplitAllowed="true" >
+				<rectangle>
+					<reportElement
+						x="-1"
+						y="0"
+						width="782"
+						height="26"
+						backcolor="#CCCCCC"
+						key="rectangle-1"/>
+					<graphicElement stretchType="NoStretch"/>
+				</rectangle>
+				<staticText>
+					<reportElement
+						x="24"
+						y="2"
+						width="262"
+						height="21"
+						key="staticText-16"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<text><![CDATA[Activity Name]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="267"
+						y="0"
+						width="12"
+						height="15"
+						forecolor="#333333"
+						key="staticText-17"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<text><![CDATA[1]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="300"
+						y="0"
+						width="12"
+						height="15"
+						key="staticText-18"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<text><![CDATA[2]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="332"
+						y="0"
+						width="12"
+						height="15"
+						forecolor="#333333"
+						key="staticText-19"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<text><![CDATA[3]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="426"
+						y="0"
+						width="12"
+						height="15"
+						key="staticText-20"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<text><![CDATA[6]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="395"
+						y="0"
+						width="12"
+						height="15"
+						forecolor="#333333"
+						key="staticText-21"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<text><![CDATA[5]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="364"
+						y="0"
+						width="12"
+						height="15"
+						key="staticText-22"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<text><![CDATA[4]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="458"
+						y="0"
+						width="12"
+						height="15"
+						forecolor="#333333"
+						key="staticText-23"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<text><![CDATA[7]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="490"
+						y="0"
+						width="12"
+						height="15"
+						key="staticText-24"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<text><![CDATA[8]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="521"
+						y="0"
+						width="12"
+						height="15"
+						forecolor="#333333"
+						key="staticText-25"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<text><![CDATA[9]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="552"
+						y="0"
+						width="12"
+						height="15"
+						key="staticText-26"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<text><![CDATA[10]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="583"
+						y="0"
+						width="12"
+						height="15"
+						forecolor="#333333"
+						key="staticText-27"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<text><![CDATA[11]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="614"
+						y="0"
+						width="12"
+						height="15"
+						key="staticText-28"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<text><![CDATA[12]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="298"
+						y="12"
+						width="12"
+						height="15"
+						key="staticText-29"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<text><![CDATA[17]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="331"
+						y="12"
+						width="12"
+						height="15"
+						forecolor="#333333"
+						key="staticText-30"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<text><![CDATA[18]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="363"
+						y="12"
+						width="12"
+						height="15"
+						key="staticText-31"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<text><![CDATA[19]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="395"
+						y="12"
+						width="12"
+						height="15"
+						forecolor="#333333"
+						key="staticText-32"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<text><![CDATA[20]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="426"
+						y="12"
+						width="12"
+						height="15"
+						key="staticText-33"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<text><![CDATA[21]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="457"
+						y="12"
+						width="12"
+						height="15"
+						forecolor="#333333"
+						key="staticText-34"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<text><![CDATA[22]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="489"
+						y="12"
+						width="12"
+						height="15"
+						key="staticText-35"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<text><![CDATA[23]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="521"
+						y="12"
+						width="12"
+						height="15"
+						forecolor="#333333"
+						key="staticText-36"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<text><![CDATA[24]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="552"
+						y="12"
+						width="12"
+						height="15"
+						key="staticText-37"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<text><![CDATA[25]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="583"
+						y="12"
+						width="12"
+						height="15"
+						forecolor="#333333"
+						key="staticText-38"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<text><![CDATA[26]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="614"
+						y="12"
+						width="12"
+						height="15"
+						key="staticText-39"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<text><![CDATA[27]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="645"
+						y="12"
+						width="12"
+						height="15"
+						forecolor="#333333"
+						key="staticText-40"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<text><![CDATA[28]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="645"
+						y="0"
+						width="12"
+						height="15"
+						forecolor="#333333"
+						key="staticText-41"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<text><![CDATA[13]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="676"
+						y="12"
+						width="12"
+						height="15"
+						key="staticText-42"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<text><![CDATA[29]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="677"
+						y="0"
+						width="12"
+						height="15"
+						key="staticText-43"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<text><![CDATA[14]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="708"
+						y="12"
+						width="12"
+						height="15"
+						forecolor="#333333"
+						key="staticText-44"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<text><![CDATA[30]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="707"
+						y="0"
+						width="12"
+						height="15"
+						forecolor="#333333"
+						key="staticText-45"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<text><![CDATA[15]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="738"
+						y="12"
+						width="12"
+						height="15"
+						key="staticText-46"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<text><![CDATA[31]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="267"
+						y="12"
+						width="12"
+						height="15"
+						key="staticText-47"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<text><![CDATA[16]]></text>
+				</staticText>
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="31"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="267"
+						y="1"
+						width="32"
+						height="14"
+						key="textField-5">
+							<printWhenExpression><![CDATA[$F{Day1}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{Day1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="300"
+						y="1"
+						width="32"
+						height="14"
+						key="textField-6">
+							<printWhenExpression><![CDATA[$F{Day2}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{Day2}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="332"
+						y="1"
+						width="31"
+						height="13"
+						key="textField-7">
+							<printWhenExpression><![CDATA[$F{Day3}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{Day3}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="363"
+						y="1"
+						width="32"
+						height="13"
+						key="textField-8">
+							<printWhenExpression><![CDATA[$F{Day4}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{Day4}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="394"
+						y="1"
+						width="32"
+						height="14"
+						key="textField-9">
+							<printWhenExpression><![CDATA[$F{Day5}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{Day5}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="425"
+						y="1"
+						width="33"
+						height="14"
+						key="textField-10">
+							<printWhenExpression><![CDATA[$F{Day6}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{Day6}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="458"
+						y="1"
+						width="31"
+						height="13"
+						key="textField-11">
+							<printWhenExpression><![CDATA[$F{Day7}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{Day7}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="489"
+						y="1"
+						width="31"
+						height="14"
+						key="textField-12">
+							<printWhenExpression><![CDATA[$F{Day8}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{Day8}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="520"
+						y="1"
+						width="32"
+						height="13"
+						key="textField-13">
+							<printWhenExpression><![CDATA[$F{Day9}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{Day9}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="551"
+						y="1"
+						width="31"
+						height="13"
+						key="textField-14">
+							<printWhenExpression><![CDATA[$F{Day10}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{Day10}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="582"
+						y="1"
+						width="31"
+						height="13"
+						key="textField-15">
+							<printWhenExpression><![CDATA[$F{Day11}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{Day11}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="614"
+						y="1"
+						width="31"
+						height="13"
+						key="textField-16">
+							<printWhenExpression><![CDATA[$F{Day12}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{Day12}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="645"
+						y="1"
+						width="32"
+						height="13"
+						key="textField-17">
+							<printWhenExpression><![CDATA[$F{Day13}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{Day13}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="676"
+						y="1"
+						width="30"
+						height="14"
+						key="textField-18">
+							<printWhenExpression><![CDATA[$F{Day14}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{Day14}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="706"
+						y="1"
+						width="30"
+						height="13"
+						key="textField-19">
+							<printWhenExpression><![CDATA[$F{Day15}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{Day15}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="267"
+						y="15"
+						width="31"
+						height="14"
+						key="textField-20">
+							<printWhenExpression><![CDATA[$F{Day16}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{Day16}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="300"
+						y="15"
+						width="32"
+						height="13"
+						key="textField-21">
+							<printWhenExpression><![CDATA[$F{Day17}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{Day17}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="333"
+						y="15"
+						width="31"
+						height="13"
+						key="textField-22">
+							<printWhenExpression><![CDATA[$F{Day18}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{Day18}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="362"
+						y="15"
+						width="31"
+						height="13"
+						key="textField-23">
+							<printWhenExpression><![CDATA[$F{Day19}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{Day19}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="395"
+						y="15"
+						width="31"
+						height="13"
+						key="textField-24">
+							<printWhenExpression><![CDATA[$F{Day20}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{Day20}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="425"
+						y="15"
+						width="32"
+						height="13"
+						key="textField-25">
+							<printWhenExpression><![CDATA[$F{Day21}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{Day21}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="458"
+						y="15"
+						width="34"
+						height="13"
+						key="textField-26">
+							<printWhenExpression><![CDATA[$F{Day22}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{Day22}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="489"
+						y="15"
+						width="33"
+						height="13"
+						key="textField-27">
+							<printWhenExpression><![CDATA[$F{Day23}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{Day23}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="520"
+						y="15"
+						width="31"
+						height="13"
+						key="textField-28">
+							<printWhenExpression><![CDATA[$F{Day24}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{Day24}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="551"
+						y="15"
+						width="30"
+						height="13"
+						key="textField-29">
+							<printWhenExpression><![CDATA[$F{Day25}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{Day25}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="582"
+						y="15"
+						width="32"
+						height="13"
+						key="textField-30">
+							<printWhenExpression><![CDATA[$F{Day26}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{Day26}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="614"
+						y="15"
+						width="31"
+						height="13"
+						key="textField-31">
+							<printWhenExpression><![CDATA[$F{Day27}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{Day27}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="645"
+						y="15"
+						width="30"
+						height="13"
+						key="textField-32">
+							<printWhenExpression><![CDATA[$F{Day28}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{Day28}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="676"
+						y="15"
+						width="32"
+						height="13"
+						key="textField-33">
+							<printWhenExpression><![CDATA[$F{Day29}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{Day29}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="706"
+						y="15"
+						width="30"
+						height="13"
+						key="textField-34">
+							<printWhenExpression><![CDATA[$F{Day30}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{Day30}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="738"
+						y="15"
+						width="30"
+						height="13"
+						key="textField-35">
+							<printWhenExpression><![CDATA[$F{Day31}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{Day31}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="25"
+						y="2"
+						width="232"
+						height="13"
+						key="textField-36"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{ActivityID}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="36"
+						y="15"
+						width="222"
+						height="14"
+						key="textField-37"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{ActivityName}]]></textFieldExpression>
+				</textField>
+				<line direction="TopDown">
+					<reportElement
+						x="0"
+						y="30"
+						width="782"
+						height="0"
+						key="line-5"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<staticText>
+					<reportElement
+						x="270"
+						y="2"
+						width="32"
+						height="16"
+						key="staticText-48">
+							<printWhenExpression><![CDATA[($F{Day1}.doubleValue() == 0 && $F{W1}.doubleValue() == 0 ? Boolean.TRUE : Boolean.FALSE)]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[-]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="270"
+						y="12"
+						width="32"
+						height="16"
+						key="staticText-49">
+							<printWhenExpression><![CDATA[$F{Day16}.doubleValue() == 0 && $F{W16}.doubleValue() == 0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[-]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="304"
+						y="12"
+						width="32"
+						height="16"
+						key="staticText-50">
+							<printWhenExpression><![CDATA[$F{Day17}.doubleValue() == 0 && $F{W17}.doubleValue() == 0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[-]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="304"
+						y="2"
+						width="32"
+						height="16"
+						key="staticText-51">
+							<printWhenExpression><![CDATA[$F{Day2}.doubleValue() == 0 && $F{W2}.doubleValue() == 0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[-]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="367"
+						y="12"
+						width="32"
+						height="16"
+						key="staticText-52">
+							<printWhenExpression><![CDATA[$F{Day19}.doubleValue() == 0 && $F{W19}.doubleValue() == 0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[-]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="367"
+						y="2"
+						width="32"
+						height="16"
+						key="staticText-53">
+							<printWhenExpression><![CDATA[$F{Day4}.doubleValue() == 0 && $F{W4}.doubleValue() == 0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[-]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="336"
+						y="2"
+						width="32"
+						height="16"
+						key="staticText-54">
+							<printWhenExpression><![CDATA[$F{Day3}.doubleValue() == 0 && $F{W3}.doubleValue() == 0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[-]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="336"
+						y="12"
+						width="32"
+						height="16"
+						key="staticText-55">
+							<printWhenExpression><![CDATA[$F{Day18}.doubleValue() == 0 && $F{W18}.doubleValue() == 0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[-]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="493"
+						y="2"
+						width="32"
+						height="16"
+						key="staticText-56">
+							<printWhenExpression><![CDATA[$F{Day8}.doubleValue() == 0 && $F{W8}.doubleValue() == 0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[-]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="493"
+						y="12"
+						width="32"
+						height="16"
+						key="staticText-57">
+							<printWhenExpression><![CDATA[$F{Day23}.doubleValue() == 0 && $F{W23}.doubleValue() == 0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[-]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="462"
+						y="2"
+						width="32"
+						height="16"
+						key="staticText-58">
+							<printWhenExpression><![CDATA[$F{Day7}.doubleValue() == 0 && $F{W7}.doubleValue() == 0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[-]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="462"
+						y="12"
+						width="32"
+						height="16"
+						key="staticText-59">
+							<printWhenExpression><![CDATA[$F{Day22}.doubleValue() == 0 && $F{W22}.doubleValue() == 0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[-]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="429"
+						y="2"
+						width="32"
+						height="16"
+						key="staticText-60">
+							<printWhenExpression><![CDATA[$F{Day6}.doubleValue() == 0 && $F{W6}.doubleValue() == 0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[-]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="429"
+						y="12"
+						width="32"
+						height="16"
+						key="staticText-61">
+							<printWhenExpression><![CDATA[$F{Day21}.doubleValue() == 0 && $F{W21}.doubleValue() == 0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[-]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="399"
+						y="2"
+						width="32"
+						height="16"
+						key="staticText-62">
+							<printWhenExpression><![CDATA[$F{Day5}.doubleValue() == 0 && $F{W5}.doubleValue() == 0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[-]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="399"
+						y="12"
+						width="32"
+						height="16"
+						key="staticText-63">
+							<printWhenExpression><![CDATA[$F{Day20}.doubleValue() == 0 && $F{W20}.doubleValue() == 0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[-]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="711"
+						y="2"
+						width="32"
+						height="16"
+						key="staticText-64">
+							<printWhenExpression><![CDATA[$F{Day15}.doubleValue() == 0 && $F{W15}.doubleValue() == 0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[-]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="711"
+						y="12"
+						width="32"
+						height="16"
+						key="staticText-65">
+							<printWhenExpression><![CDATA[$F{Day30}.doubleValue() == 0 && $F{W30}.doubleValue() == 0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[-]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="680"
+						y="2"
+						width="32"
+						height="16"
+						key="staticText-66">
+							<printWhenExpression><![CDATA[$F{Day14}.doubleValue() == 0 && $F{W14}.doubleValue() == 0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[-]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="680"
+						y="12"
+						width="32"
+						height="16"
+						key="staticText-67">
+							<printWhenExpression><![CDATA[$F{Day29}.doubleValue() == 0 && $F{W29}.doubleValue() == 0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[-]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="649"
+						y="2"
+						width="32"
+						height="16"
+						key="staticText-68">
+							<printWhenExpression><![CDATA[$F{Day13}.doubleValue() == 0 && $F{W13}.doubleValue() == 0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[-]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="649"
+						y="12"
+						width="32"
+						height="16"
+						key="staticText-69">
+							<printWhenExpression><![CDATA[$F{Day28}.doubleValue() == 0 && $F{W28}.doubleValue() == 0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[-]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="618"
+						y="2"
+						width="32"
+						height="16"
+						key="staticText-70">
+							<printWhenExpression><![CDATA[$F{Day12}.doubleValue() == 0 && $F{W12}.doubleValue() == 0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[-]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="618"
+						y="12"
+						width="32"
+						height="16"
+						key="staticText-71">
+							<printWhenExpression><![CDATA[$F{Day27}.doubleValue() == 0 && $F{W27}.doubleValue() == 0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[-]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="586"
+						y="2"
+						width="32"
+						height="16"
+						key="staticText-72">
+							<printWhenExpression><![CDATA[$F{Day11}.doubleValue() == 0 && $F{W11}.doubleValue() == 0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[-]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="586"
+						y="12"
+						width="32"
+						height="16"
+						key="staticText-73">
+							<printWhenExpression><![CDATA[$F{Day26}.doubleValue() == 0 && $F{W26}.doubleValue() == 0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[-]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="555"
+						y="2"
+						width="32"
+						height="16"
+						key="staticText-74">
+							<printWhenExpression><![CDATA[$F{Day10}.doubleValue() == 0 && $F{W10}.doubleValue() == 0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[-]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="555"
+						y="12"
+						width="32"
+						height="16"
+						key="staticText-75">
+							<printWhenExpression><![CDATA[$F{Day25}.doubleValue() == 0 && $F{W25}.doubleValue() == 0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[-]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="524"
+						y="2"
+						width="32"
+						height="16"
+						key="staticText-76">
+							<printWhenExpression><![CDATA[$F{Day9}.doubleValue() == 0 && $F{W9}.doubleValue() == 0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[-]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="524"
+						y="12"
+						width="32"
+						height="16"
+						key="staticText-77">
+							<printWhenExpression><![CDATA[$F{Day24}.doubleValue() == 0 && $F{W24}.doubleValue() == 0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[-]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="742"
+						y="12"
+						width="32"
+						height="16"
+						key="staticText-78">
+							<printWhenExpression><![CDATA[$F{Day31}.doubleValue() == 0 && $F{W31}.doubleValue() == 0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[-]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="leave"
+						x="267"
+						y="1"
+						width="32"
+						height="14"
+						key="textField-71">
+							<printWhenExpression><![CDATA[$F{W1}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{W1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="leave"
+						x="300"
+						y="1"
+						width="32"
+						height="14"
+						key="textField-72">
+							<printWhenExpression><![CDATA[$F{W2}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{W2}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="leave"
+						x="332"
+						y="1"
+						width="31"
+						height="13"
+						key="textField-73">
+							<printWhenExpression><![CDATA[$F{W3}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{W3}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="leave"
+						x="363"
+						y="1"
+						width="32"
+						height="13"
+						key="textField-74">
+							<printWhenExpression><![CDATA[$F{W4}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{W4}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="leave"
+						x="394"
+						y="1"
+						width="32"
+						height="14"
+						key="textField-75">
+							<printWhenExpression><![CDATA[$F{W5}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{W5}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="leave"
+						x="425"
+						y="1"
+						width="33"
+						height="14"
+						key="textField-76">
+							<printWhenExpression><![CDATA[$F{W6}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{W6}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="leave"
+						x="458"
+						y="1"
+						width="31"
+						height="13"
+						key="textField-77">
+							<printWhenExpression><![CDATA[$F{W7}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{W7}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="leave"
+						x="489"
+						y="1"
+						width="31"
+						height="14"
+						key="textField-78">
+							<printWhenExpression><![CDATA[$F{W8}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{W8}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="leave"
+						x="520"
+						y="1"
+						width="32"
+						height="13"
+						key="textField-79">
+							<printWhenExpression><![CDATA[$F{W9}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{W9}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="leave"
+						x="551"
+						y="1"
+						width="31"
+						height="13"
+						key="textField-80">
+							<printWhenExpression><![CDATA[$F{W10}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{W10}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="leave"
+						x="582"
+						y="1"
+						width="31"
+						height="13"
+						key="textField-81">
+							<printWhenExpression><![CDATA[$F{W11}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{W11}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="leave"
+						x="614"
+						y="1"
+						width="31"
+						height="13"
+						key="textField-82">
+							<printWhenExpression><![CDATA[$F{W12}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{W12}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="leave"
+						x="267"
+						y="15"
+						width="31"
+						height="14"
+						key="textField-83">
+							<printWhenExpression><![CDATA[$F{W16}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{W16}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="leave"
+						x="300"
+						y="15"
+						width="32"
+						height="13"
+						key="textField-84">
+							<printWhenExpression><![CDATA[$F{W17}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{W17}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="leave"
+						x="333"
+						y="15"
+						width="31"
+						height="13"
+						key="textField-85">
+							<printWhenExpression><![CDATA[$F{W18}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{W18}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="leave"
+						x="362"
+						y="15"
+						width="31"
+						height="13"
+						key="textField-86">
+							<printWhenExpression><![CDATA[$F{W19}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{W19}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="leave"
+						x="395"
+						y="15"
+						width="31"
+						height="13"
+						key="textField-87">
+							<printWhenExpression><![CDATA[$F{W20}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{W20}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="leave"
+						x="425"
+						y="15"
+						width="32"
+						height="13"
+						key="textField-88">
+							<printWhenExpression><![CDATA[$F{W21}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{W21}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="leave"
+						x="458"
+						y="15"
+						width="34"
+						height="13"
+						key="textField-89">
+							<printWhenExpression><![CDATA[$F{W22}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{W22}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="leave"
+						x="489"
+						y="15"
+						width="33"
+						height="13"
+						key="textField-90">
+							<printWhenExpression><![CDATA[$F{W23}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{W23}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="leave"
+						x="520"
+						y="15"
+						width="31"
+						height="13"
+						key="textField-91">
+							<printWhenExpression><![CDATA[$F{W24}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{W24}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="leave"
+						x="551"
+						y="15"
+						width="30"
+						height="13"
+						key="textField-92">
+							<printWhenExpression><![CDATA[$F{W25}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{W25}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="leave"
+						x="582"
+						y="15"
+						width="32"
+						height="13"
+						key="textField-93">
+							<printWhenExpression><![CDATA[$F{W26}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{W26}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="leave"
+						x="614"
+						y="15"
+						width="31"
+						height="13"
+						key="textField-94">
+							<printWhenExpression><![CDATA[$F{W27}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{W27}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="leave"
+						x="645"
+						y="1"
+						width="32"
+						height="13"
+						key="textField-95">
+							<printWhenExpression><![CDATA[$F{W13}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{W13}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="leave"
+						x="676"
+						y="1"
+						width="30"
+						height="14"
+						key="textField-96">
+							<printWhenExpression><![CDATA[$F{W14}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{W14}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="leave"
+						x="706"
+						y="1"
+						width="30"
+						height="13"
+						key="textField-97">
+							<printWhenExpression><![CDATA[$F{W15}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{W15}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="leave"
+						x="645"
+						y="15"
+						width="30"
+						height="13"
+						key="textField-98">
+							<printWhenExpression><![CDATA[$F{W28}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{W28}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="leave"
+						x="676"
+						y="15"
+						width="32"
+						height="13"
+						key="textField-99">
+							<printWhenExpression><![CDATA[$F{W29}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{W29}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="leave"
+						x="706"
+						y="15"
+						width="30"
+						height="13"
+						key="textField-100">
+							<printWhenExpression><![CDATA[$F{W30}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{W30}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0.00;(###0.00)" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="leave"
+						x="738"
+						y="15"
+						width="30"
+						height="13"
+						key="textField-101">
+							<printWhenExpression><![CDATA[$F{W31}.doubleValue() == 0 ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<textElement>
+						<font pdfFontName="Helvetica" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{W31}]]></textFieldExpression>
+				</textField>
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="5"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="23"  isSplitAllowed="true" >
+				<staticText>
+					<reportElement
+						x="-1"
+						y="7"
+						width="31"
+						height="11"
+						key="staticText-79"/>
+					<box></box>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[Printed]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" pattern="dd MMMMM yyyy" isBlankWhenNull="false" evaluationTime="Report" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="33"
+						y="6"
+						width="99"
+						height="12"
+						key="textField-164"/>
+					<box></box>
+					<textElement>
+						<font fontName="Georgia"/>
+					</textElement>
+				<textFieldExpression   class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="HH.mm.ss" isBlankWhenNull="false" evaluationTime="Report" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="133"
+						y="6"
+						width="55"
+						height="12"
+						key="textField-165"/>
+					<box></box>
+					<textElement>
+						<font fontName="Georgia"/>
+					</textElement>
+				<textFieldExpression   class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="191"
+						y="6"
+						width="66"
+						height="12"
+						key="textField-166"/>
+					<box></box>
+					<textElement textAlignment="Right">
+						<font fontName="Georgia" size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA["Page " + $V{PAGE_NUMBER} + " of "]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Report" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="258"
+						y="6"
+						width="66"
+						height="12"
+						key="textField-167"/>
+					<box></box>
+					<textElement>
+						<font fontName="Georgia" size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA["" + $V{PAGE_NUMBER} + ""]]></textFieldExpression>
+				</textField>
+			</band>
+		</pageFooter>
+		<lastPageFooter>
+			<band height="22"  isSplitAllowed="true" >
+				<line direction="TopDown">
+					<reportElement
+						x="0"
+						y="4"
+						width="782"
+						height="0"
+						key="line-6"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						x="0"
+						y="6"
+						width="782"
+						height="0"
+						key="line-7"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<staticText>
+					<reportElement
+						x="3"
+						y="11"
+						width="31"
+						height="11"
+						key="staticText-80"/>
+					<box></box>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[Printed]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" pattern="dd MMMMM yyyy" isBlankWhenNull="false" evaluationTime="Report" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="37"
+						y="10"
+						width="99"
+						height="12"
+						key="textField-168"/>
+					<box></box>
+					<textElement>
+						<font fontName="Georgia"/>
+					</textElement>
+				<textFieldExpression   class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="HH.mm.ss" isBlankWhenNull="false" evaluationTime="Report" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="137"
+						y="9"
+						width="55"
+						height="12"
+						key="textField-169"/>
+					<box></box>
+					<textElement>
+						<font fontName="Georgia"/>
+					</textElement>
+				<textFieldExpression   class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="195"
+						y="9"
+						width="66"
+						height="12"
+						key="textField-170"/>
+					<box></box>
+					<textElement textAlignment="Right">
+						<font fontName="Georgia" size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA["Page " + $V{PAGE_NUMBER} + " of "]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Report" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="262"
+						y="9"
+						width="66"
+						height="12"
+						key="textField-171"/>
+					<box></box>
+					<textElement>
+						<font fontName="Georgia" size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA["" + $V{PAGE_NUMBER} + ""]]></textFieldExpression>
+				</textField>
+			</band>
+		</lastPageFooter>
+		<summary>
+			<band height="5"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>

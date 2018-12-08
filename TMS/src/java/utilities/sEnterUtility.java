@@ -1,0 +1,95 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package utilities;
+
+import beans.pages.WorkUtilityPage;
+import java.io.*;
+import java.net.*;
+
+import javax.servlet.*;
+import javax.servlet.http.*;
+import tmsclass.WorkUtility.queryAnalyzer;
+
+/**
+ *
+ * @author Abree
+ */
+public class sEnterUtility extends HttpServlet {
+    
+    private WorkUtilityPage _MyPage = null;
+    private WorkUtilityPage _MyTempPage = null;
+    private queryAnalyzer _MyQueryAnalyzer = new queryAnalyzer();
+    
+    /** 
+    * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+    * @param request servlet request
+    * @param response servlet response
+    */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        try {
+/******************************************************************************
+ *--Response Section--                                                        *
+ ******************************************************************************/
+    response.sendRedirect("/TMS/webpages/Admin/Utilities/WorkDays.jsp");
+
+        } finally { 
+            out.close();
+        }
+    } 
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /** 
+    * Handles the HTTP <code>GET</code> method.
+    * @param request servlet request
+    * @param response servlet response
+    */
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    throws ServletException, IOException {
+        
+/******************************************************************************
+ *--Declaration/Instantiation Section--                                       *
+ ******************************************************************************/
+    _MyPage = (WorkUtilityPage)request.getSession().getAttribute("PWorkUtilityPage");
+    
+/******************************************************************************
+ *--Refresh Section--                                                         *
+ ******************************************************************************/
+
+/******************************************************************************
+ *--Check Input Section--                                                     *
+ ******************************************************************************/
+
+/******************************************************************************
+ *--Process Section--                                                         *
+ ******************************************************************************/
+    _MyTempPage = _MyQueryAnalyzer.reset();
+    _MyPage.setAllowedDays(_MyTempPage.getAllowedDays());
+    _MyPage.setDeadline(_MyTempPage.getDeadline());
+    
+        processRequest(request, response);
+    } 
+
+    /** 
+    * Handles the HTTP <code>POST</code> method.
+    * @param request servlet request
+    * @param response servlet response
+    */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    /** 
+    * Returns a short description of the servlet.
+    */
+    public String getServletInfo() {
+        return "Short description";
+    }
+    // </editor-fold>
+}

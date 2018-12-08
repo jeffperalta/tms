@@ -1,0 +1,74 @@
+/* CSS Document */
+div.title{
+	position:absolute;
+	width:721px;
+	top:8px;
+	left:2px;
+	font:Verdana;
+	font-size:18px;
+	color:#666666;
+	font-weight: bold;
+}
+
+div.subtitle{
+	position:absolute;
+	width:721px;
+	top:53px;
+	left:1px;
+	font:Verdana;
+	font-size:10px;
+}
+
+div.subtitle hr {
+	height:2px;
+	color:#FF9900;
+	width:100%;
+}
+
+div.subtitle li{
+	list-style : none;
+}
+
+div.criteria-listing {
+	position:absolute;
+	width: 722px;
+	top: 150px;
+	font: Verdana;
+	font-size: 12px;
+	left: 1px;
+	height: 147px;
+}
+
+div.criteria-filter {
+	position:absolute;
+	width: 722px;
+	top: 306px;
+	font: Verdana;
+	font-size: 12px;
+	left: 1px;
+	height: 32px;
+
+}
+
+div.table-listing {
+	position:absolute;
+	top:348px;
+	width:722px;
+	font:Verdana;
+	font-size:14px;
+	left: 1px;
+}
+
+tr.table-header{
+	background-color:#FF9900;
+	color:#FFFFFF;
+	font:Verdana;
+	font-weight:bold;
+	font-size:12px;
+}
+
+.caption{
+	font:verdana;
+	color:#999999;
+	font-size:9px;
+}
